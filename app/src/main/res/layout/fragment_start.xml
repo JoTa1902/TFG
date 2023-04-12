@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment_start">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondo">
+
+        <ImageButton
+            android:id="@+id/emulators"
+            android:layout_width="175dp"
+            android:layout_height="153dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.196"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.527"
+            app:srcCompat="@drawable/mando"
+            tools:ignore="ContentDescription,HardcodedText,SpeakableTextPresentCheck"
+            android:contentDescription="TODO" />
+
+        <ImageButton
+            android:id="@+id/store"
+            android:layout_width="164dp"
+            android:layout_height="139dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.786"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bolsa"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
