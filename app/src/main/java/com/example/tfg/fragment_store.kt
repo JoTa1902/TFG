@@ -138,7 +138,7 @@ class fragment_store : Fragment() {
 
     private fun isAppInstalled(packageName: String): Boolean {
         return try {
-            val packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            val packageInfo = requireContext().packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
             packageInfo != null
         } catch (e: PackageManager.NameNotFoundException) {
             false
