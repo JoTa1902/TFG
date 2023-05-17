@@ -1,35 +1,17 @@
 package com.example.tfg
 
+import android.app.AlertDialog
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.core.content.ContextCompat
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [fragment_start.newInstance] factory method to
- * create an instance of this fragment.
- */
+@Suppress("DEPRECATION")
 class fragment_start : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +19,10 @@ class fragment_start : Fragment() {
         val view = inflater.inflate(R.layout.fragment_start, container, false)
         val storeButton = view.findViewById<ImageButton>(R.id.store)
         storeButton.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(requireContext(),
+                    android.Manifest.permission.GET_PACKAGE_SIZE) != PackageManager.PERMISSION_GRANTED){
+                showPackagePermissionDialog(this)
+            }
             val fragmentStore = fragment_store()
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.contenedor_fragments, fragmentStore, "fragment_store")
@@ -46,23 +32,22 @@ class fragment_start : Fragment() {
         return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment fragment_start.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            fragment_start().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun showPackagePermissionDialog(fragment: Fragment) {
+        val permission = android.Manifest.permission.GET_PACKAGE_SIZE
+        if (ContextCompat.checkSelfPermission(fragment.requireContext(), permission)
+            != PackageManager.PERMISSION_GRANTED) {
+            // Si los permisos no están activados, muestre una ventana emergente
+            AlertDialog.Builder(fragment.requireContext())
+                .setTitle("Permiso package")
+                .setMessage("Se requieren permisos de paquetes para continuar.")
+                .setPositiveButton("ALLOW") { _, _ ->
+                    // Si el usuario presiona "ALLOW", solicite los permisos
+                    fragment.requestPermissions(arrayOf(permission), 1)
                 }
-            }
+                .setNegativeButton("CANCEL", null)
+                .show()
+        }
     }
+
 }
+

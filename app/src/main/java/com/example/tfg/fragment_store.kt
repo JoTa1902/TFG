@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.*
 import android.content.*
 import android.content.pm.PackageManager
-import android.database.ContentObserver
 import android.net.Uri
 import android.os.*
 import android.provider.Settings
@@ -14,10 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import java.io.File
@@ -26,8 +22,8 @@ import java.io.File
 @Suppress("DEPRECATION")
 class fragment_store : Fragment() {
 
-    private val PERMISSION_REQUEST_CODE = 1
-    private val ipServer = "192.168.56.104"
+    //private val PERMISSION_REQUEST_CODE = 1
+    //private val ipServer = "192.168.56.104"
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,14 +33,26 @@ class fragment_store : Fragment() {
         val nds = view.findViewById<ImageButton>(R.id.nds)
         val psp = view.findViewById<ImageButton>(R.id.psp)
 
+
+
         gameboy.setOnClickListener {
             if (ContextCompat.checkSelfPermission(requireContext(),
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                 showWriteStoragePermissionDialog(this)
-            } else {
+            }
+
+            if (isMyBoyProInstalled(requireContext())){
+                val fragmentCatalog = fragment_catalog()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
+                    .addToBackStack(null)
+                    .commit()
+            }else{
                 downloadAndInstall(requireContext(), "https://file.hapmod.com/uploads/My-Boy-Pro-1.8.0-premium-CoiMobile.Com.com.apk", "MyBoy")
             }
+
         }
+
 
         nds.setOnClickListener {
             if (ContextCompat.checkSelfPermission(requireContext(),
@@ -60,6 +68,7 @@ class fragment_store : Fragment() {
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 showWriteStoragePermissionDialog(this)
             } else {
+
                 downloadAndInstall(requireContext(), "https://file.hapmod.com/uploads/PPSSPP-Gold-v1.13.1-CoiMobile.com.apk", "PPSSPP")
             }
         }
@@ -136,10 +145,14 @@ class fragment_store : Fragment() {
             .show()
     }
 
-    private fun isAppInstalled(packageName: String): Boolean {
+    //funcion para comprobar si la app esta instalada
+    private fun isMyBoyProInstalled(context: Context): Boolean {
+        val packageName = "com.fastemulator.gt"
+        val packageManager = context.packageManager
+
         return try {
-            val packageInfo = requireContext().packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
-            packageInfo != null
+            val packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            true
         } catch (e: PackageManager.NameNotFoundException) {
             false
         }
@@ -156,20 +169,18 @@ class fragment_store : Fragment() {
     //funciones para comprobar y aceptar permisos de escritura y fuentes desconocidas en la app
     fun requestInstallUnknownSourcesPermission(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !activity.packageManager.canRequestPackageInstalls()) {
-            // Si los permisos de fuentes desconocidas no están activados, muestre una ventana emergente con los botones "SETTINGS" y "CANCEL"
+            // Si los permisos de fuentes desconocidas no están activados, muestre una ventana emergente
             AlertDialog.Builder(activity)
                 .setTitle("Permisos de fuentes desconocidas")
                 .setMessage("Se requieren permisos de fuentes desconocidas para continuar.")
                 .setPositiveButton("SETTINGS") { _, _ ->
-                    // Si el usuario presiona "SETTINGS", abra la configuración de seguridad para que pueda activar los permisos de fuentes desconocidas
+                    // Si el usuario presiona "SETTINGS", abre la configuración para activar los permisos de fuentes desconocidas
                     val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
                     intent.data = Uri.parse("package:${activity.packageName}")
                     activity.startActivityForResult(intent, 2)
                 }
                 .setNegativeButton("CANCEL", null)
                 .show()
-        } else {
-            // Si los permisos de fuentes desconocidas ya están activados, continuar con la lógica de tu aplicación
         }
     }
     @Deprecated("Deprecated in Java")
@@ -177,17 +188,17 @@ class fragment_store : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Si el usuario otorga los permisos de escritura, solicite permisos de instalación de fuentes desconocidas
+                // Si el usuario otorga los permisos de escritura, solicita permisos de instalación de fuentes desconocidas
                 requestInstallUnknownSourcesPermission(requireContext() as Activity)
             } else {
-                // Si el usuario no otorga los permisos de escritura, muestre un mensaje de error
+                // Si el usuario no otorga los permisos de escritura, muestra un mensaje de error
                 Toast.makeText(requireContext(), "Los permisos son necesarios para continuar", Toast.LENGTH_SHORT).show()
             }
         } else if (requestCode == 2) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Si el usuario otorga los permisos de instalación de fuentes desconocidas, continue con la lógica de su aplicación
+                // Si el usuario otorga los permisos de instalación de fuentes desconocidas
             } else {
-                // Si el usuario no otorga los permisos de instalación de fuentes desconocidas, muestre un mensaje de error
+                // Si el usuario no otorga los permisos de instalación de fuentes desconocidas, muestra un mensaje de error
                 Toast.makeText(requireContext(), "Los permisos son necesarios para continuar", Toast.LENGTH_SHORT).show()
             }
         }
@@ -197,7 +208,7 @@ class fragment_store : Fragment() {
         val permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
         if (ContextCompat.checkSelfPermission(fragment.requireContext(), permission)
             != PackageManager.PERMISSION_GRANTED) {
-            // Si los permisos no están activados, muestre una ventana emergente con los botones "ALLOW" y "CANCEL"
+            // Si los permisos no están activados, muestre una ventana emergente
             AlertDialog.Builder(fragment.requireContext())
                 .setTitle("Permisos de escritura")
                 .setMessage("Se requieren permisos de escritura para continuar.")
@@ -209,6 +220,8 @@ class fragment_store : Fragment() {
                 .show()
         }
     }
+
+
 
 
 }
