@@ -36,39 +36,53 @@ class fragment_store : Fragment() {
 
 
         gameboy.setOnClickListener {
+            val isMyBoyProInstalled = isPackageInstalled(requireContext(), "com.fastemulator.gt")
             if (ContextCompat.checkSelfPermission(requireContext(),
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                 showWriteStoragePermissionDialog(this)
             }
-
-            if (isMyBoyProInstalled(requireContext())){
+            if (isMyBoyProInstalled){
                 val fragmentCatalog = fragment_catalog()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
                     .addToBackStack(null)
                     .commit()
-            }else{
+            }else {
                 downloadAndInstall(requireContext(), "https://file.hapmod.com/uploads/My-Boy-Pro-1.8.0-premium-CoiMobile.Com.com.apk", "MyBoy")
             }
-
         }
 
 
         nds.setOnClickListener {
+            val isDrasticInstalled = isPackageInstalled(requireContext(), "com.fastemulator.gt")
             if (ContextCompat.checkSelfPermission(requireContext(),
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 showWriteStoragePermissionDialog(this)
-            } else {
+            }
+            if (isDrasticInstalled){
+                val fragmentCatalog = fragment_catalog()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
+                    .addToBackStack(null)
+                    .commit()
+            }else {
                 downloadAndInstall(requireContext(), "https://file.hapmod.com/uploads/DraStic-r2.5.2.2a-CoiMobile.Com.apk", "Drastic")
             }
         }
 
         psp.setOnClickListener {
+            val isPPSSPPInstalled = isPackageInstalled(requireContext(), "com.fastemulator.gt")
             if (ContextCompat.checkSelfPermission(requireContext(),
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 showWriteStoragePermissionDialog(this)
-            } else {
-
+            }
+            if (isPPSSPPInstalled){
+            val fragmentCatalog = fragment_catalog()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
+                .addToBackStack(null)
+                .commit()
+            }else {
                 downloadAndInstall(requireContext(), "https://file.hapmod.com/uploads/PPSSPP-Gold-v1.13.1-CoiMobile.com.apk", "PPSSPP")
             }
         }
@@ -146,16 +160,17 @@ class fragment_store : Fragment() {
     }
 
     //funcion para comprobar si la app esta instalada
-    private fun isMyBoyProInstalled(context: Context): Boolean {
-        val packageName = "com.fastemulator.gt"
+    fun isPackageInstalled(context: Context, packageName: String): Boolean {
         val packageManager = context.packageManager
+        val installedPackages = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
 
-        return try {
-            val packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
-            true
-        } catch (e: PackageManager.NameNotFoundException) {
-            false
+        for (packageInfo in installedPackages) {
+            if (packageInfo.packageName == packageName) {
+                return true
+            }
         }
+
+        return false
     }
 
 

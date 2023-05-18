@@ -34,10 +34,17 @@ class fragment_catalog : Fragment() {
         val view = inflater.inflate(R.layout.fragment_catalog, container, false)
 
         val pacman = view.findViewById<LinearLayout>(R.id.pacman)
+        val tetris = view.findViewById<LinearLayout>(R.id.tetris)
 
         pacman.setOnClickListener {
             download(requireContext(), "https://server.emulatorgames.net/roms/gameboy-advance/Pac-Man%20Collection%20(U)%20[!].zip", "Pac-Man")
         }
+
+        tetris.setOnClickListener {
+            download(requireContext(), "https://server.emulatorgames.net/roms/gameboy-advance/Tetris%20Worlds%20(U)%20[!].zip", "Tetris")
+        }
+
+
 
 
 
@@ -48,7 +55,7 @@ class fragment_catalog : Fragment() {
         // Crear un cuadro de diálogo de confirmación para descargar la aplicación
         AlertDialog.Builder(context)
             .setTitle("Descargar juego")
-            .setMessage("¿Estás seguro que deseas descargar e instalar $appName?")
+            .setMessage("¿Estás seguro que deseas descargar $appName?")
             .setPositiveButton("Descargar") { dialog, which ->
                 // Preparar la descarga
                 val request = DownloadManager.Request(Uri.parse(downloadUrl)).apply {
@@ -84,21 +91,7 @@ class fragment_catalog : Fragment() {
                             if (cursor.moveToFirst()) {
                                 val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
                                 if (status == DownloadManager.STATUS_SUCCESSFUL) {
-                                    // Instalar la aplicación
-                                    val localUri = cursor.getString(cursor.getColumnIndex(
-                                        DownloadManager.COLUMN_LOCAL_URI))
-                                    if (localUri != null) {
-                                        val file = File(Uri.parse(localUri).path.toString())
-                                        if (file.exists() && file.length() == cursor.getLong(cursor.getColumnIndex(
-                                                DownloadManager.COLUMN_TOTAL_SIZE_BYTES))) {
-                                            val apkUri = FileProvider.getUriForFile(context!!, "${context.packageName}.provider", file)
-                                            val installIntent = Intent(Intent.ACTION_INSTALL_PACKAGE).apply {
-                                                setDataAndType(apkUri, "application/vnd.android.package-archive")
-                                                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
-                                            }
-                                            context.startActivity(installIntent)
-                                        }
-                                    }
+                                    Toast.makeText(context, "La descarga se ha completado", Toast.LENGTH_SHORT).show()
                                 } else {
                                     // La descarga ha fallado, mostrar un mensaje de error
                                     Toast.makeText(context, "La descarga ha fallado. Por favor, inténtelo de nuevo más tarde.", Toast.LENGTH_SHORT).show()
