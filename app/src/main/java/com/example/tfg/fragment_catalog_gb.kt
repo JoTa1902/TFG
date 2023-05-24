@@ -18,23 +18,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.ScrollView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.FileProvider
-import java.io.File
+import androidx.constraintlayout.widget.ConstraintLayout
 
-class fragment_catalog : Fragment() {
+class fragment_catalog_gb : Fragment() {
 
 
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_catalog, container, false)
+        val view = inflater.inflate(R.layout.fragment_catalog_gb, container, false)
 
-        val pacman = view.findViewById<LinearLayout>(R.id.pacman)
-        val tetris = view.findViewById<LinearLayout>(R.id.tetris)
+        val pacman = view.findViewById<ConstraintLayout>(R.id.pacman)
+        val tetris = view.findViewById<ConstraintLayout>(R.id.tetris)
+        val mario = view.findViewById<ConstraintLayout>(R.id.mario)
 
         pacman.setOnClickListener {
             download(requireContext(), "https://server.emulatorgames.net/roms/gameboy-advance/Pac-Man%20Collection%20(U)%20[!].zip", "Pac-Man")
@@ -42,6 +40,10 @@ class fragment_catalog : Fragment() {
 
         tetris.setOnClickListener {
             download(requireContext(), "https://server.emulatorgames.net/roms/gameboy-advance/Tetris%20Worlds%20(U)%20[!].zip", "Tetris")
+        }
+
+        mario.setOnClickListener {
+            download(requireContext(), "https://server.emulatorgames.net/roms/gameboy-advance/Classic%20NES%20-%20Super%20Mario%20Bros.%20GBA.zip", "Super Mario Bros")
         }
 
 

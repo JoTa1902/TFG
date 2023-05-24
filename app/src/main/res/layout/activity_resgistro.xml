@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/colr"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#353434"
-    tools:context=".Inicio">
+    tools:context=".Resgistro">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,21 +21,6 @@
 
 
     <Button
-        android:id="@+id/login"
-        android:layout_width="114dp"
-        android:layout_height="46dp"
-        android:background="@drawable/degradado"
-        android:fontFamily="@font/aldrich"
-        android:text="@string/log_in"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.741"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
         android:id="@+id/singup"
         android:layout_width="113dp"
         android:layout_height="46dp"
@@ -43,11 +29,10 @@
         android:text="@string/sing_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.788"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.741"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.871"
+        tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="300dp"
@@ -55,10 +40,10 @@
         android:textColorHint="#FFB8B8B8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.446">
+        app:layout_constraintVertical_bias="0.442">
 
         <EditText
             android:id="@+id/user"
@@ -82,10 +67,10 @@
         android:textColorHint="#FFB8B8B8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572"
+        app:layout_constraintVertical_bias="0.673"
         app:endIconMode="password_toggle">
 
         <EditText
@@ -105,17 +90,30 @@
             tools:ignore="Autofill,SpeakableTextPresentCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="60dp"
-        android:layout_height="56dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="300dp"
+        android:layout_height="67dp"
+        android:textColorHint="#FFB8B8B8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.906"
-        app:srcCompat="@drawable/google"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.557">
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textPersonName"
+            android:textColor="#FFB8B8B8"
+            android:textColorHighlight="#f6813c"
+            android:textColorHint="#FFB8B8B8"
+            android:textColorLink="#f6813c"
+            tools:ignore="Autofill,SpeakableTextPresentCheck,TextFields" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

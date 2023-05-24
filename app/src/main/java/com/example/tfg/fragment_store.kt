@@ -42,7 +42,7 @@ class fragment_store : Fragment() {
                 showWriteStoragePermissionDialog(this)
             }
             if (isMyBoyProInstalled){
-                val fragmentCatalog = fragment_catalog()
+                val fragmentCatalog = fragment_catalog_gb()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
                     .addToBackStack(null)
@@ -54,13 +54,13 @@ class fragment_store : Fragment() {
 
 
         nds.setOnClickListener {
-            val isDrasticInstalled = isPackageInstalled(requireContext(), "com.fastemulator.gt")
+            val isDrasticInstalled = isPackageInstalled(requireContext(), "com.dsemu.drastic")
             if (ContextCompat.checkSelfPermission(requireContext(),
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 showWriteStoragePermissionDialog(this)
             }
             if (isDrasticInstalled){
-                val fragmentCatalog = fragment_catalog()
+                val fragmentCatalog = fragment_catalog_gb()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
                     .addToBackStack(null)
@@ -71,13 +71,13 @@ class fragment_store : Fragment() {
         }
 
         psp.setOnClickListener {
-            val isPPSSPPInstalled = isPackageInstalled(requireContext(), "com.fastemulator.gt")
+            val isPPSSPPInstalled = isPackageInstalled(requireContext(), "org.ppsspp.ppssppgold")
             if (ContextCompat.checkSelfPermission(requireContext(),
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 showWriteStoragePermissionDialog(this)
             }
             if (isPPSSPPInstalled){
-            val fragmentCatalog = fragment_catalog()
+            val fragmentCatalog = fragment_catalog_gb()
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
                 .addToBackStack(null)

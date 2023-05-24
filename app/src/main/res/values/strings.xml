@@ -9,4 +9,6 @@
     <string name="_2_60_mb">2,60 MB</string>
     <string name="archivo">Archivo</string>
     <string name="tama_o_archivo">Tamaño Archivo</string>
+    <string name="email">Email</string>
+    <string name="prefs_file">com.example.tfg.PREFERENCE_FILE_KEY</string>
 </resources>

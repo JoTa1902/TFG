@@ -16,15 +16,15 @@
             android:layout_width="175dp"
             android:layout_height="153dp"
             android:background="#00FFFFFF"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.196"
+            app:layout_constraintHorizontal_bias="0.21"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.527"
+            app:layout_constraintVertical_bias="0.341"
             app:srcCompat="@drawable/mando"
-            tools:ignore="ContentDescription,HardcodedText,SpeakableTextPresentCheck"
-            android:contentDescription="TODO" />
+            tools:ignore="ContentDescription,HardcodedText,SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/store"
@@ -33,9 +33,10 @@
             android:background="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.786"
+            app:layout_constraintHorizontal_bias="0.79"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.323"
             app:srcCompat="@drawable/bolsa"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
