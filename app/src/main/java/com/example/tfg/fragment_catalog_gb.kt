@@ -14,41 +14,56 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.*
 
 class fragment_catalog_gb : Fragment() {
 
+    private lateinit var database: DatabaseReference
+    private lateinit var gameListAdapter: GameListAdapter
+    private lateinit var gameList: MutableList<Juegos>
 
-    @SuppressLint("MissingInflatedId")
-    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_catalog_gb, container, false)
 
-        val pacman = view.findViewById<ConstraintLayout>(R.id.pacman)
-        val tetris = view.findViewById<ConstraintLayout>(R.id.tetris)
-        val mario = view.findViewById<ConstraintLayout>(R.id.mario)
+        // Inicializar la base de datos
+        database = FirebaseDatabase.getInstance().reference
 
-        pacman.setOnClickListener {
-            download(requireContext(), "https://server.emulatorgames.net/roms/gameboy-advance/Pac-Man%20Collection%20(U)%20[!].zip", "Pac-Man")
-        }
+        // Inicializar la lista de juegos
+        gameList = mutableListOf()
 
-        tetris.setOnClickListener {
-            download(requireContext(), "https://server.emulatorgames.net/roms/gameboy-advance/Tetris%20Worlds%20(U)%20[!].zip", "Tetris")
-        }
+        // Configurar el RecyclerView y el adaptador
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        gameListAdapter = GameListAdapter(requireContext(), gameList)
+        recyclerView.adapter = gameListAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        mario.setOnClickListener {
-            download(requireContext(), "https://server.emulatorgames.net/roms/gameboy-advance/Classic%20NES%20-%20Super%20Mario%20Bros.%20GBA.zip", "Super Mario Bros")
-        }
+        // Escuchar los cambios en la base de datos
+        val juegosRef = database.child("Juegos")
+        juegosRef.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                gameList.clear()
+                for (snapshot in dataSnapshot.children) {
+                    val juego = snapshot.getValue(Juegos::class.java)
+                    juego?.let {
+                        gameList.add(it)
+                    }
+                }
+                gameListAdapter.notifyDataSetChanged()
+            }
 
-
-
-
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Manejar el error, si es necesario
+            }
+        })
 
         return view
     }
@@ -108,4 +123,7 @@ class fragment_catalog_gb : Fragment() {
             .show()
     }
 }
+
+
+
 

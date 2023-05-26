@@ -2,49 +2,62 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:fitsSystemWindows="true"
     tools:context=".Principal">
 
+
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="162dp"
-        android:layout_height="71dp"
+        android:id="@+id/logoImageView"
+        android:layout_width="172dp"
+        android:layout_height="66dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.011"
         app:srcCompat="@drawable/logo"
         tools:ignore="ContentDescription" />
 
-    <ImageButton
-        android:id="@+id/arrow_back"
-        android:layout_width="43dp"
-        android:layout_height="41dp"
-        android:background="#00FFFFFF"
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="35dp"
+        android:layout_height="36dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.043"
-        app:srcCompat="@drawable/baseline_arrow_back_24"
-        tools:ignore="ContentDescription" />
+        app:srcCompat="@drawable/arrow" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contenedor_fragments"
         android:name="com.example.tfg.fragment_start"
-        android:layout_width="0dp"
-        android:layout_height="325dp"
+        android:layout_width="843dp"
+        android:layout_height="341dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="VisualLintBounds"
         tools:layout="@layout/fragment_start" />
+
+    <ImageView
+        android:id="@+id/UserImageView"
+        android:layout_width="52dp"
+        android:layout_height="37dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042"
+        app:srcCompat="@drawable/usuario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

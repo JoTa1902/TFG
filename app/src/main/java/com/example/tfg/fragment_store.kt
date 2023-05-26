@@ -44,7 +44,7 @@ class fragment_store : Fragment() {
             if (isMyBoyProInstalled){
                 val fragmentCatalog = fragment_catalog_gb()
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
+                    .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog_gb")
                     .addToBackStack(null)
                     .commit()
             }else {
@@ -60,9 +60,9 @@ class fragment_store : Fragment() {
                 showWriteStoragePermissionDialog(this)
             }
             if (isDrasticInstalled){
-                val fragmentCatalog = fragment_catalog_gb()
+                val fragmentCatalog = fragment_catalog_ds()
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog")
+                    .replace(R.id.contenedor_fragments, fragmentCatalog, "fragment_catalog_ds")
                     .addToBackStack(null)
                     .commit()
             }else {

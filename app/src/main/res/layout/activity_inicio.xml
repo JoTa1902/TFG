@@ -8,7 +8,7 @@
     tools:context=".Inicio">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/game1"
         android:layout_width="411dp"
         android:layout_height="275dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,12 +35,12 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/singup"
+        android:id="@+id/signup"
         android:layout_width="113dp"
         android:layout_height="46dp"
         android:background="@drawable/degradado"
         android:fontFamily="@font/aldrich"
-        android:text="@string/sing_up"
+        android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.788"
@@ -106,7 +106,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/googleButton"
         android:layout_width="60dp"
         android:layout_height="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
