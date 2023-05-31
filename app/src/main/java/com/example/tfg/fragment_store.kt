@@ -40,7 +40,7 @@ class fragment_store : Fragment() {
                     .addToBackStack(null)
                     .commit()
             }else {
-                downloadAndInstall(requireContext(), "https://dl.apkbe.com/down.do/com.fastemulator.gba_1.8.0_paid?code=769f0c4b3196f97865a73723a5596308", "MyBoy")
+                downloadAndInstall(requireContext(), "https://dl.apkbe.com/down.do/com.fastemulator.gba_1.8.0_paid?code=6681b2bb6e37f8768ee31398a85ed36f", "MyBoy")
             }
         }
 
