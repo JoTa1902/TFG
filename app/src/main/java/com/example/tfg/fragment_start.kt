@@ -18,6 +18,7 @@ class fragment_start : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_start, container, false)
         val storeButton = view.findViewById<ImageButton>(R.id.store)
+        val emulatorsButton = view.findViewById<ImageButton>(R.id.emulators)
         storeButton.setOnClickListener {
             if (ContextCompat.checkSelfPermission(requireContext(),
                     android.Manifest.permission.GET_PACKAGE_SIZE) != PackageManager.PERMISSION_GRANTED){
@@ -29,6 +30,16 @@ class fragment_start : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+
+        emulatorsButton.setOnClickListener {
+            val fragmentEmulators = fragment_emulators()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.contenedor_fragments, fragmentEmulators, "fragment_emulators")
+                .addToBackStack(null)
+                .commit()
+        }
+
+
         return view
     }
 

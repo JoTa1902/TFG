@@ -60,7 +60,7 @@ class fragment_user : Fragment() {
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    // Maneja el error de lectura de la base de datos
+                    Toast.makeText(requireContext(), "Error al obtener los datos del usuario", Toast.LENGTH_SHORT).show()
                 }
             })
         }

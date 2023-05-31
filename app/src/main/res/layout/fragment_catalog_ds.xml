@@ -23,7 +23,7 @@
             app:layout_constraintBottom_toTopOf="@+id/recyclerView">
 
             <TextView
-                android:layout_width="339dp"
+                android:layout_width="383dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
@@ -33,7 +33,7 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:layout_width="224dp"
+                android:layout_width="237dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="start|center_vertical"

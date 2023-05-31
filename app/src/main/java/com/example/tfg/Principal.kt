@@ -32,7 +32,6 @@ class Principal : AppCompatActivity(){
         }
 
         val arrow = findViewById<ImageView>(R.id.arrow)
-        val inicio = findViewById<ImageView>(R.id.logoImageView)
 
         //si el contenedor de fragments es distinto a fragment_start, arrowBack es visible
         supportFragmentManager.addOnBackStackChangedListener {
@@ -45,16 +44,12 @@ class Principal : AppCompatActivity(){
         }
 
         arrow.setOnClickListener(){
-            //vuelve al fragment anterior
-            supportFragmentManager.popBackStack()
-        }
-
-        inicio.setOnClickListener(){
-            //vuelve a fragment_start
-            supportFragmentManager.popBackStack("fragment_start", 0)
+            //si el fragmento es distinto de fragment_start() vuelve al fragment anterior
+            if(supportFragmentManager.findFragmentById(R.id.contenedor_fragments) != fragmentStart){
+                supportFragmentManager.popBackStack()
+            }
         }
 
     }
-
 
 }

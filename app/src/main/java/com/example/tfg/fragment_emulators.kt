@@ -1,59 +1,76 @@
 package com.example.tfg
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.example.tfg.fragment_gb
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [fragment_emulators.newInstance] factory method to
- * create an instance of this fragment.
- */
 class fragment_emulators : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_emulators, container, false)
+
+        val gb = view.findViewById<ImageView>(R.id.gbImageView)
+        val ds = view.findViewById<ImageView>(R.id.dsImageView)
+        val psp = view.findViewById<ImageView>(R.id.pspImageView)
+
+        gb.setOnClickListener{
+            val isMyBoyProInstalled = Utils.isPackageInstalled(requireContext(), "com.fastemulator.gba")
+            if (isMyBoyProInstalled){
+                val fragmentGB = fragment_gb()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.contenedor_fragments, fragmentGB, "fragment_gb")
+                    .addToBackStack(null)
+                    .commit()
+            }
+            else{
+               Utils.showInstallEmulatorDialog(requireContext(), "MyBoy")
+            }
+
+        }
+
+        ds.setOnClickListener{
+            val isDrasticInstalled = Utils.isPackageInstalled(requireContext(), "com.dsemu.drastic")
+            if (isDrasticInstalled){
+                val fragmentDS = fragment_ds()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.contenedor_fragments, fragmentDS, "fragment_ds")
+                    .addToBackStack(null)
+                    .commit()
+            }
+            else{
+                Utils.showInstallEmulatorDialog(requireContext(), "Drastic DS")
+            }
+        }
+
+        psp.setOnClickListener{
+            val isPPSSPPInstalled = Utils.isPackageInstalled(requireContext(), "org.ppsspp.ppsspp")
+            if (isPPSSPPInstalled){
+                val fragmentPSP = fragment_psp()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.contenedor_fragments, fragmentPSP, "fragment_psp")
+                    .addToBackStack(null)
+                    .commit()
+            }
+            else{
+                Utils.showInstallEmulatorDialog(requireContext(), "PPSSPP")
+            }
+        }
+
+
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_emulators, container, false)
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment fragment_emulators.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            fragment_emulators().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

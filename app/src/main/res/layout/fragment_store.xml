@@ -12,33 +12,6 @@
         android:background="@drawable/fondo">
 
         <ImageButton
-            android:id="@+id/nds"
-            android:layout_width="171dp"
-            android:layout_height="104dp"
-            android:background="#00FFFFFF"
-            android:src="@drawable/dslogo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.351"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
-
-        <ImageButton
-            android:id="@+id/gameboy"
-            android:layout_width="168dp"
-            android:layout_height="143dp"
-            android:background="#00FFFFFF"
-            android:src="@drawable/gameboylogo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.119"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.332"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
-
-        <ImageButton
             android:id="@+id/psp"
             android:layout_width="157dp"
             android:layout_height="91dp"
@@ -49,8 +22,35 @@
             app:layout_constraintHorizontal_bias="0.876"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.359"
+            app:layout_constraintVertical_bias="0.44"
             tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/gameboy"
+            android:layout_width="168dp"
+            android:layout_height="143dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/gameboylogo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.429"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/nds"
+            android:layout_width="171dp"
+            android:layout_height="104dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/dslogo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.436"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
